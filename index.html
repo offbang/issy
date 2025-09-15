@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonJohn - Smart Trading Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        purple: {
+                            950: '#1e1b4b'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-950 text-white min-h-screen">
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Navbar Component
+        const Navbar = () => {
+            return (
+                <nav className="flex items-center justify-between p-6 lg:px-8">
+                    <div className="flex items-center">
+                        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 h-8 w-8 rounded-lg"></div>
+                        <span className="ml-2 text-xl font-bold">DanJohn</span>
+                    </div>
+                    
+                    <div className="hidden md:flex space-x-8">
+                        <a href="#" className="text-sm font-semibold leading-6 text-gray-300 hover:text-white">Features</a>
+                        <a href="#" className="text-sm font-semibold leading-6 text-gray-300 hover:text-white">Pricing</a>
+                        <a href="#" className="text-sm font-semibold leading-6 text-gray-300 hover:text-white">Insights</a>
+                    </div>
+                    
+                    <button className="hidden md:block bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 rounded-lg text-sm font-semibold hover:from-purple-700 hover:to-indigo-700 transition">
+                        Get Started
+                    </button>
+                    
+                    <button className="md:hidden">
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </nav>
+            );
+        };
+
+        // Hero Section
+        const HeroSection = () => {
+            return (
+                <div className="relative overflow-hidden pt-10 pb-20">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+                                    Smart Trading Insights for <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Forex, Futures & Indices</span>
+                                </h1>
+                                <p className="mt-6 text-lg text-gray-300 max-w-2xl">
+                                    Proven strategies and analysis to spot high-probability setups, manage risk, and grow consistently.
+                                </p>
+                                <div className="mt-10 flex flex-wrap gap-4">
+                                    <button className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-indigo-700 transition">
+                                        Start Free Trial
+                                    </button>
+                                    <button className="bg-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
+                                        Watch Demo
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="relative">
+                                <div className="absolute -top-10 -right-10 w-64 h-64 bg-purple-600 rounded-full mix-blend-soft-light filter blur-3xl opacity-70 animate-pulse-slow"></div>
+                                <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-indigo-600 rounded-full mix-blend-soft-light filter blur-3xl opacity-70 animate-pulse-slow"></div>
+                                <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-2 h-80 flex items-center justify-center border border-gray-700 shadow-xl">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-indigo-600/10 rounded-2xl"></div>
+                                    <div className="relative bg-gray-800 rounded-xl h-full w-full flex items-center justify-center">
+                                        <div className="w-full p-6">
+                                            <div className="flex justify-between items-center mb-4">
+                                                <div className="text-sm font-semibold">EUR/USD</div>
+                                                <div className="text-green-500 text-sm">+1.24%</div>
+                                            </div>
+                                            <div className="h-40 bg-gradient-to-b from-gray-900 to-gray-800 rounded-lg p-4">
+                                                <div className="h-full bg-gradient-to-r from-purple-600/10 to-indigo-600/10 rounded-lg border border-purple-500/30 relative">
+                                                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-green-500/10 to-transparent rounded-lg"></div>
+                                                    <div className="absolute top-4 left-4 right-4 h-8 bg-gradient-to-r from-green-500/5 to-purple-500/5 rounded"></div>
+                                                    <div className="absolute bottom-4 left-4 right-4 h-8 bg-gradient-to-r from-purple-500/5 to-green-500/5 rounded"></div>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between mt-4 text-xs">
+                                                <div>1.08742</div>
+                                                <div className="text-gray-400">Live</div>
+                                                <div>1.09256</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Card Component
+        const Card = ({ title, description, icon }) => {
+            return (
+                <div className="bg-gradient-to-b from-gray-900 to-gray-800 p-6 rounded-2xl border border-gray-800 shadow-lg">
+                    <div className="bg-gradient-to-r from-purple-600 to-indigo-600 w-12 h-12 rounded-lg flex items-center justify-center">
+                        {icon}
+                    </div>
+                    <h3 className="text-xl font-bold mt-4">{title}</h3>
+                    <p className="mt-2 text-gray-300">{description}</p>
+                </div>
+            );
+        };
+
+        // Features Section
+        const FeaturesSection = () => {
+            return (
+                <div className="py-20 bg-gray-950">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold">Professional Trading Features</h2>
+                            <p className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                                Our proven methodology gives you the tools and insights needed for successful trading.
+                            </p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                            <Card 
+                                title="Market Analysis" 
+                                description="Expert analysis of thousands of market data points to identify high-probability trading opportunities." 
+                                icon={<svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>}
+                            />
+                            <Card 
+                                title="Risk Management" 
+                                description="Set automatic stop-loss and take-profit levels to protect your investments and maximize returns." 
+                                icon={<svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>}
+                            />
+                            <Card 
+                                title="Real-time Alerts" 
+                                description="Get instant notifications when market conditions match your predefined trading criteria." 
+                                icon={<svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>}
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // PricingCard Component
+        const PricingCard = ({ title, price, period, features, popular, buttonVariant }) => {
+            return (
+                <div className={`bg-gradient-to-b from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-800 shadow-lg ${popular ? 'ring-2 ring-purple-500 relative' : ''}`}>
+                    {popular && (
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-xs font-bold px-4 py-1 rounded-full">
+                            POPULAR
+                        </div>
+                    )}
+                    <h3 className="text-2xl font-bold">{title}</h3>
+                    <div className="mt-4">
+                        <span className="text-4xl font-bold">${price}</span>
+                        <span className="text-gray-400">/{period}</span>
+                    </div>
+                    <ul className="mt-6 space-y-4">
+                        {features.map((feature, index) => (
+                            <li key={index} className="flex items-start">
+                                <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <button className={`mt-8 w-full py-3 rounded-lg font-semibold transition ${buttonVariant}`}>
+                        Get Started
+                    </button>
+                </div>
+            );
+        };
+
+        // Pricing Section
+        const PricingSection = () => {
+            return (
+                <div className="py-20 bg-gradient-to-b from-gray-950 to-purple-950">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold">Transparent Pricing</h2>
+                            <p className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                                Choose the plan that fits your trading needs. All plans include access to our expert insights.
+                            </p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                            <PricingCard 
+                                title="Starter" 
+                                price={29} 
+                                period="month" 
+                                features={[
+                                    "Basic market analysis",
+                                    "5 currency pairs",
+                                    "3 daily trade signals",
+                                    "Email support",
+                                    "Mobile app access"
+                                ]}
+                                buttonVariant="bg-gray-700 hover:bg-gray-600"
+                            />
+                            <PricingCard 
+                                title="Professional" 
+                                price={79} 
+                                period="month" 
+                                popular={true}
+                                features={[
+                                    "Advanced market analysis",
+                                    "All major currency pairs",
+                                    "Unlimited trade signals",
+                                    "Priority support",
+                                    "Real-time alerts",
+                                    "Risk management tools"
+                                ]}
+                                buttonVariant="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                            />
+                            <PricingCard 
+                                title="Enterprise" 
+                                price={199} 
+                                period="month" 
+                                features={[
+                                    "All Professional features",
+                                    "Custom trading strategies",
+                                    "Dedicated account manager",
+                                    "Historical data analysis",
+                                    "API access",
+                                    "White-label solutions"
+                                ]}
+                                buttonVariant="bg-gray-700 hover:bg-gray-600"
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // CardWithImage Component
+        const CardWithImage = ({ title, excerpt, image }) => {
+            return (
+                <div className="bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl border border-gray-800 shadow-lg overflow-hidden">
+                    <div className="h-48 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 flex items-center justify-center">
+                        {image}
+                    </div>
+                    <div className="p-6">
+                        <h3 className="text-xl font-bold">{title}</h3>
+                        <p className="mt-2 text-gray-300">{excerpt}</p>
+                        <a href="#" className="mt-4 inline-flex items-center text-purple-400 hover:text-purple-300">
+                            Read more
+                            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            );
+        };
+
+        // Insights Section
+        const InsightsSection = () => {
+            return (
+                <div className="py-20 bg-gray-950">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold">Trading Insights</h2>
+                            <p className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                                Latest market analysis and trading strategies from our experts.
+                            </p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                            <CardWithImage 
+                                title="Forex Market Trends for Q4 2023" 
+                                excerpt="Analyzing the major currency pairs and predicting movements for the coming quarter based on economic indicators." 
+                                image={<div className="bg-gradient-to-r from-purple-500/30 to-indigo-500/30 h-full w-full flex items-center justify-center"><svg className="w-16 h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg></div>}
+                            />
+                            <CardWithImage 
+                                title="Proven Strategies for Futures Trading" 
+                                excerpt="Time-tested approaches to futures trading that help manage risk while maximizing profit potential." 
+                                image={<div className="bg-gradient-to-r from-purple-500/30 to-indigo-500/30 h-full w-full flex items-center justify-center"><svg className="w-16 h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg></div>}
+                            />
+                            <CardWithImage 
+                                title="Risk Management Strategies for Volatile Markets" 
+                                excerpt="Protecting your investments during periods of high market volatility with proven risk management techniques." 
+                                image={<div className="bg-gradient-to-r from-purple-500/30 to-indigo-500/30 h-full w-full flex items-center justify-center"><svg className="w-16 h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg></div>}
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // CTA Section
+        const CTASection = () => {
+            return (
+                <div className="py-20 bg-gradient-to-r from-purple-900/30 to-indigo-900/30">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                        <h2 className="text-3xl font-bold">Ready to Transform Your Trading?</h2>
+                        <p className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                            Join thousands of traders who are already using DanJohn's proven methodologies to maximize their trading profits.
+                        </p>
+                        <button className="mt-8 bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-indigo-700 transition">
+                            Start Your Free Trial
+                        </button>
+                        <p className="mt-4 text-sm text-gray-400">No credit card required. 14-day free trial.</p>
+                    </div>
+                </div>
+            );
+        };
+
+        // Footer Component
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-900 py-12">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="flex flex-col md:flex-row justify-between items-center">
+                            <div className="flex items-center">
+                                <div className="bg-gradient-to-r from-purple-600 to-indigo-600 h-8 w-8 rounded-lg"></div>
+                                <span className="ml-2 text-xl font-bold">DanJohn</span>
+                            </div>
+                            <div className="flex space-x-6 mt-6 md:mt-0">
+                                <a href="#" className="text-sm text-gray-400 hover:text-white">Privacy Policy</a>
+                                <a href="#" className="text-sm text-gray-400 hover:text-white">Terms of Service</a>
+                                <a href="#" className="text-sm text-gray-400 hover:text-white">Cookie Policy</a>
+                            </div>
+                        </div>
+                        <div className="mt-8 text-center md:text-left text-sm text-gray-400">
+                            &copy; {new Date().getFullYear()} DanJohn. All rights reserved. This is a demo website for illustration purposes only. Trading involves risk.
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            return (
+                <div className="bg-gray-950">
+                    <Navbar />
+                    <HeroSection />
+                    <FeaturesSection />
+                    <PricingSection />
+                    <InsightsSection />
+                    <CTASection />
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Render the application
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
