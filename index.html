@@ -1,255 +1,309 @@
-import React from "react";
-import { ArrowRight, Activity, BarChart2, ShieldCheck, Users, Slack } from "lucide-react";
-import { motion } from "framer-motion";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TRADING DOJON — Professional trading insights</title>
+  <meta name="description" content="TRADING DOJON — Daily & weekly trading insights, market analysis, and practical education for traders." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff; --text:#0f1724; --muted:#6b7280;
+      --accent-1:#4f46e5; --accent-2:#06b6d4;
+      --card:#f8fafc; --border:#e6eef6;
+      --success:#059669;
+      --radius:14px;
+      --maxw:1100px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--maxw); margin:0 auto; padding:28px 20px;}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:46px;height:46px;border-radius:10px; display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2)); box-shadow:0 6px 18px rgba(79,70,229,0.12);}
+    .brand h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav{display:none}
+    .cta{display:flex;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-weight:600;font-size:14px}
+    .btn-primary{background:var(--text); color:white}
+    .btn-outline{border:1px solid var(--border); padding:9px 12px; color:var(--text); background:white}
 
-// Single-file React component for a premium fintech landing page
-// Uses Tailwind CSS utility classes. Import this component into your app or use it as a starting point.
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;padding:48px 0}
+    .hero h2{font-size:34px;margin:0;line-height:1.02}
+    .hero p{margin-top:12px;color:var(--muted);max-width:70ch}
+    .hero-actions{display:flex;gap:12px;margin-top:18px}
+    .small-features{display:flex;gap:14px;margin-top:20px;font-size:13px;color:var(--muted);flex-wrap:wrap}
 
-export default function TradingDojonLanding() {
-  return (
-    <div className="min-h-screen bg-white text-slate-900 antialiased">
-      {/* Page container */}
-      <header className="max-w-7xl mx-auto px-6 lg:px-8 py-8 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center shadow-md">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 17L9 11L13 15L21 7" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div>
-            <div className="text-sm font-semibold">TRADING DOJON</div>
-            <div className="text-xs text-slate-500 -mt-0.5">Professional trading insights</div>
-          </div>
+    /* dashboard card */
+    .dash-card{border-radius:20px;background:linear-gradient(180deg,#fff, #fbfdff);padding:20px;border:1px solid var(--border);box-shadow:0 12px 40px rgba(6,11,23,0.04)}
+    .dash-top{display:flex;justify-content:space-between;align-items:center}
+    .dash-chart{height:150px;border-radius:12px;margin-top:14px;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300"><rect width="800" height="300" fill="%23f8fafc"/><polyline fill="none" stroke="%2387cdf9" stroke-width="2" points="0,160 60,140 120,150 180,120 240,110 300,130 360,102 420,120 480,100 540,80 600,110 660,90 720,70 780,60"/></svg>'); background-size:cover; background-position:center}
+    .dash-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;color:var(--muted);font-size:13px}
+
+    /* sections */
+    section{padding:48px 0;border-top:1px solid #f3f6f9}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{background:white;border-radius:12px;padding:18px;border:1px solid var(--border);box-shadow:0 6px 20px rgba(9,12,16,0.03)}
+    .feature h4{margin:0;font-size:15px}
+    .feature p{margin:10px 0 0;color:var(--muted);font-size:13px}
+
+    /* community CTA */
+    .community{border-radius:16px;padding:26px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:white;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .community .actions{display:flex;gap:10px;align-items:center}
+
+    /* footer */
+    footer{padding:28px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+    /* responsive */
+    @media(min-width:880px){
+      nav{display:flex;gap:18px;align-items:center}
+      .hero{grid-template-columns:1fr 420px}
+      .grid-3{grid-template-columns:repeat(3,1fr)}
+    }
+    @media(max-width:879px){
+      .grid-3{grid-template-columns:1fr}
+      .brand h1{font-size:15px}
+    }
+
+    /* marquee */
+    .ticker{overflow:hidden;border-top:1px solid #f3f6f9;margin-top:18px;padding:10px 0}
+    .ticker-inner{display:inline-block;padding-left:100%;white-space:nowrap;animation:marquee 16s linear infinite}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* subtle hover */
+    .feature:hover{transform:translateY(-6px);transition:all .18s ease}
+    .btn-primary:hover{opacity:.95;transform:translateY(-1px)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- checkmark svg -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 17L9 11L13 15L21 7" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-
-        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
-          <a href="#insights" className="hover:text-slate-900">Insights</a>
-          <a href="#education" className="hover:text-slate-900">Education</a>
-          <a href="#community" className="hover:text-slate-900">Community</a>
-          <a href="#about" className="hover:text-slate-900">About</a>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 text-sm hover:shadow">Instagram</a>
-          <a href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-slate-900 text-white text-sm hover:opacity-95">Join Discord</a>
+        <div>
+          <h1>TRADING DOJON</h1>
+          <p>Professional trading insights</p>
         </div>
-      </header>
-
-      <main>
-        {/* HERO */}
-        <section className="relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-28 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">Market clarity for confident traders.</h1>
-              <p className="mt-4 text-lg text-slate-600 max-w-xl">Daily and weekly trading insights, rigorous market analysis, and simple education — TRADING DOJON helps both beginners and experienced traders trade with discipline and clarity.</p>
-
-              <div className="mt-6 flex gap-4">
-                <a href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-indigo-600 text-white font-medium shadow hover:opacity-95">
-                  Join Discord
-                  <ArrowRight size={16} />
-                </a>
-
-                <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-slate-200 text-sm font-medium hover:shadow">
-                  Follow Instagram
-                </a>
-              </div>
-
-              <div className="mt-8 grid grid-cols-3 gap-4 max-w-md text-xs text-slate-500">
-                <div className="flex flex-col">
-                  <span className="font-semibold text-slate-900">Daily Insights</span>
-                  <span className="mt-1">Actionable market notes every morning</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold text-slate-900">Risk-first Signals</span>
-                  <span className="mt-1">Position sizing & exits</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold text-slate-900">Education</span>
-                  <span className="mt-1">Clear, practical lessons</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="relative w-full">
-              {/* Faux dashboard card */}
-              <div className="relative bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-xl p-6 border border-slate-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-xs text-slate-500">Portfolio</div>
-                    <div className="text-lg font-semibold">Equities · FX · Crypto</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xs text-slate-500">Today P/L</div>
-                    <div className="text-lg font-semibold text-emerald-600">+1.28%</div>
-                  </div>
-                </div>
-
-                <div className="mt-4 h-40 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22300%22><rect width=%22800%22 height=%22300%22 fill=%22%23f8fafc%22/><polyline fill=%22none%22 stroke=%22%2387cdf9%22 stroke-width=%222%22 points=%220,160 60,140 120,150 180,120 240,110 300,130 360,102 420,120 480,100 540,80 600,110 660,90 720,70 780,60%22/></svg>')] bg-cover bg-center rounded-lg shadow-inner"></div>
-
-                <div className="mt-4 grid grid-cols-3 gap-3 text-sm text-slate-600">
-                  <div className="flex flex-col">
-                    <span className="font-semibold">Top idea</span>
-                    <span className="mt-1">EURUSD short · 1.1200</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-semibold">Risk</span>
-                    <span className="mt-1">0.5% / trade</span>
-                  </div>
-                  <div className="flex flex-col text-right">
-                    <span className="font-semibold">Signal</span>
-                    <span className="mt-1 text-emerald-600">Confirmed</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* subtle floating badge */}
-              <div className="absolute -bottom-6 left-6 bg-white/60 backdrop-blur rounded-xl px-3 py-2 border border-slate-100 text-xs shadow">Trusted by independent traders</div>
-            </motion.div>
-          </div>
-
-          {/* decorative ticker */}
-          <div className="w-full border-t border-slate-100 py-2">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-              <div className="overflow-hidden">
-                <div className="whitespace-nowrap animate-marquee text-sm text-slate-600">EURUSD 1.1212 · BTCUSD 63,450 · S&P 500 4,650 · GOLD 2,100 · OIL 82.35 ·</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ABOUT */}
-        <section id="about" className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold">About TRADING DOJON</h2>
-              <p className="mt-4 text-slate-600 max-w-2xl">TRADING DOJON exists to demystify markets — we provide consistent, transparent, and experience-driven insights so traders can make informed decisions. Whether you’re learning the basics or refining advanced setups, our content prioritizes risk management, clarity, and repeatable process.</p>
-
-              <ul className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-slate-700">
-                <li className="flex items-start gap-3">
-                  <ShieldCheck className="mt-1" />
-                  <div>
-                    <div className="font-semibold">Transparent process</div>
-                    <div className="text-slate-500 text-sm">Clear entry, stop, and targets</div>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-3">
-                  <Users className="mt-1" />
-                  <div>
-                    <div className="font-semibold">Community-driven</div>
-                    <div className="text-slate-500 text-sm">Active Discord for daily discussion</div>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-3">
-                  <Activity className="mt-1" />
-                  <div>
-                    <div className="font-semibold">Consistent cadence</div>
-                    <div className="text-slate-500 text-sm">Daily notes + weekly deep dives</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="rounded-2xl bg-slate-50 p-6 border border-slate-100 shadow-sm">
-              <div className="text-xs text-slate-500">How we help</div>
-              <div className="mt-2 font-semibold text-lg">Clear signals. Strong risk rules. Better decisions.</div>
-
-              <div className="mt-4 text-sm text-slate-600">We focus on structure-based setups, simple risk templates, and short lesson-sized explainers so you can act, not just read.</div>
-
-              <div className="mt-4 flex gap-2">
-                <a href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-md text-sm bg-indigo-600 text-white inline-flex items-center gap-2">Join Discord</a>
-                <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" className="px-3 py-2 rounded-md text-sm border border-slate-200 inline-flex items-center gap-2">Instagram</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FEATURES / INSIGHTS */}
-        <section id="insights" className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <h3 className="text-xl font-semibold">Trading Insights</h3>
-          <p className="mt-2 text-slate-600 max-w-2xl">Practical, no-nonsense sections that help you understand the market and act with conviction.</p>
-
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <FeatureCard icon={<BarChart2 />} title="Daily Market Insights" desc="Short, actionable summaries of the market landscape each morning." />
-            <FeatureCard icon={<Activity />} title="Signal Analysis" desc="Why a signal is valid, where to manage risk, and how to size positions." />
-            <FeatureCard icon={<ShieldCheck />} title="Risk Management" desc="Concrete rules for sizing, stop placement, and drawdown control." />
-            <FeatureCard icon={<Users />} title="Beginner Breakdowns" desc="Simple explainers that build towards real-world application." />
-            <FeatureCard icon={<BarChart2 />} title="Chart Explanations" desc="Candlestick analysis, market structure, and trend frameworks." />
-            <FeatureCard icon={<Slack />} title="Community Insights" desc="Crowd-sourced insights and post-trade reviews from our Discord." />
-          </div>
-        </section>
-
-        {/* SOCIAL PROOF */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-8 py-16 bg-slate-50">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h4 className="text-2xl font-bold">Trusted by active traders</h4>
-              <p className="mt-3 text-slate-600 max-w-lg">See the latest highlights, follower updates, and success stories on our Instagram. We keep things transparent — no hidden track records, just practical learnings and charts.</p>
-
-              <div className="mt-6 flex gap-3">
-                <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" className="px-4 py-2 rounded-md border border-slate-200 inline-flex items-center gap-2">Open Instagram</a>
-                <a href="#community" className="px-4 py-2 rounded-md bg-slate-900 text-white inline-flex items-center gap-2">Open Discord</a>
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-slate-100 p-4">
-              {/* Instagram embed placeholder (static) */}
-              <div className="h-56 bg-white rounded-lg border border-slate-100 flex items-center justify-center text-slate-400">Instagram feed preview</div>
-            </div>
-          </div>
-        </section>
-
-        {/* COMMUNITY CTA */}
-        <section id="community" className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="rounded-2xl bg-gradient-to-r from-indigo-700 to-cyan-600 text-white p-8 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl font-bold">Join the TRADING DOJON community</h3>
-              <p className="mt-2 text-slate-100/90 max-w-xl">Daily insight threads, real-time chat, market reviews, and a supportive group that holds risk-first discipline above all.</p>
-            </div>
-
-            <div className="flex gap-3">
-              <a href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer" className="px-5 py-3 rounded-md bg-white text-indigo-700 font-semibold inline-flex items-center gap-2">Join Discord</a>
-              <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" className="px-5 py-3 rounded-md border border-white/30 inline-flex items-center gap-2">Instagram</a>
-            </div>
-          </div>
-        </section>
-
-        {/* FOOTER */}
-        <footer className="max-w-7xl mx-auto px-6 lg:px-8 py-10 text-sm text-slate-600">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <div className="font-semibold">TRADING DOJON</div>
-              <div className="text-xs text-slate-500 mt-1">Trusted market insights · Daily & Weekly</div>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <a href="#" className="hover:text-slate-900">Telegram (coming)</a>
-              <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" className="hover:text-slate-900">Instagram</a>
-              <a href="mailto:hello@tradingdojon.example" className="hover:text-slate-900">hello@tradingdojon.example</a>
-            </div>
-          </div>
-
-          <div className="mt-6 text-xs text-slate-400">© {new Date().getFullYear()} TRADING DOJON. All rights reserved.</div>
-        </footer>
-      </main>
-
-      <style jsx>{`
-        .animate-marquee { animation: marquee 16s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0%);} 100% { transform: translateX(-50%);} }
-      `}</style>
-    </div>
-  );
-}
-
-function FeatureCard({ icon, title, desc }) {
-  return (
-    <motion.div whileHover={{ y: -6 }} className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center">{icon}</div>
-        <div className="font-semibold">{title}</div>
       </div>
-      <div className="mt-3 text-sm text-slate-600">{desc}</div>
-    </motion.div>
-  );
-}
+
+      <nav>
+        <a href="#insights">Insights</a>
+        <a href="#education">Education</a>
+        <a href="#community">Community</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-outline" href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer">Instagram</a>
+        <a class="btn btn-primary" href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer">Join Discord</a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="hero">
+      <div>
+        <h2>Market clarity for confident traders.</h2>
+        <p>Daily and weekly trading insights, rigorous market analysis, and practical education — TRADING DOJON helps beginners and experienced traders act with discipline and clarity.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer">Join Discord</a>
+          <a class="btn btn-outline" href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer">Follow Instagram</a>
+        </div>
+
+        <div class="small-features">
+          <div><strong>Daily Insights</strong> · Actionable morning notes</div>
+          <div><strong>Signal Analysis</strong> · Entry, stop, target</div>
+          <div><strong>Education</strong> · Short, practical lessons</div>
+        </div>
+      </div>
+
+      <!-- faux dashboard -->
+      <div>
+        <div class="dash-card">
+          <div class="dash-top">
+            <div>
+              <div style="font-size:12px;color:var(--muted)">Portfolio</div>
+              <div style="font-weight:700">Equities · FX · Crypto</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:12px;color:var(--muted)">Today P/L</div>
+              <div style="font-weight:700;color:var(--success)">+1.28%</div>
+            </div>
+          </div>
+
+          <div class="dash-chart" role="img" aria-label="Market chart preview"></div>
+
+          <div class="dash-meta">
+            <div><strong>Top idea</strong><div style="color:var(--muted);margin-top:6px">EURUSD short · 1.1200</div></div>
+            <div><strong>Risk</strong><div style="color:var(--muted);margin-top:6px">0.5% / trade</div></div>
+            <div style="text-align:right"><strong>Signal</strong><div style="color:var(--success);margin-top:6px">Confirmed</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;font-size:13px;color:var(--muted);">Trusted by independent traders</div>
+      </div>
+
+      <!-- ticker -->
+    </main>
+
+    <div class="ticker">
+      <div class="ticker-inner">EURUSD 1.1212 · BTCUSD 63,450 · S&P 500 4,650 · GOLD 2,100 · OIL 82.35 · EURUSD 1.1212 · BTCUSD 63,450 ·</div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <div style="display:grid;grid-template-columns:1fr;gap:18px">
+        <div>
+          <h3 id="about-title" style="margin:0;font-size:20px">About TRADING DOJON</h3>
+          <p style="color:var(--muted);margin-top:12px;max-width:70ch">TRADING DOJON exists to demystify markets — we provide consistent, transparent, and experience-driven insights so traders can make informed decisions. Whether you're learning the basics or refining advanced setups, our content prioritizes risk management, clarity, and repeatable process.</p>
+
+          <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L2 7v6c0 5 4 9 10 9s10-4 10-9V7l-10-5z" stroke="#111827" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Transparent process</strong><div style="color:var(--muted);font-size:13px">Clear entry, stop, and targets</div></div>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" stroke="#111827" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Community-driven</strong><div style="color:var(--muted);font-size:13px">Active Discord for daily discussion</div></div>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#111827" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Consistent cadence</strong><div style="color:var(--muted);font-size:13px">Daily notes + weekly deep dives</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-radius:12px;padding:16px;background:var(--card);border:1px solid var(--border);max-width:420px">
+          <div style="font-size:12px;color:var(--muted)">How we help</div>
+          <div style="font-weight:700;margin-top:8px">Clear signals. Strong risk rules. Better decisions.</div>
+          <p style="color:var(--muted);margin-top:8px">We focus on structure-based setups, simple risk templates, and short lesson-sized explainers so you can act, not just read.</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <a class="btn btn-primary" href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer">Join Discord</a>
+            <a class="btn btn-outline" href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSIGHTS / FEATURES -->
+    <section id="insights" aria-labelledby="insights-title">
+      <h3 id="insights-title" style="margin:0;font-size:18px">Trading Insights</h3>
+      <p style="color:var(--muted);margin-top:8px;max-width:70ch">Practical, no-nonsense sections that help you understand the market and act with conviction.</p>
+
+      <div class="grid-3" style="margin-top:18px">
+        <div class="feature">
+          <h4>Daily Market Insights</h4>
+          <p>Short, actionable summaries of the market landscape each morning.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Signal Analysis</h4>
+          <p>Why a signal is valid, where to manage risk, and how to size positions.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Risk Management</h4>
+          <p>Concrete rules for sizing, stop placement, and drawdown control.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Beginner Breakdowns</h4>
+          <p>Simple explainers that build towards real-world application.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Chart Explanations</h4>
+          <p>Candlestick analysis, market structure, and trend frameworks.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Community Insights</h4>
+          <p>Crowd-sourced insights and post-trade reviews from our Discord.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section style="background:var(--card);border-radius:12px;padding:20px;margin-top:18px;display:grid;grid-template-columns:1fr;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <h4 style="margin:0">Trusted by active traders</h4>
+          <p style="color:var(--muted);margin-top:8px;max-width:50ch">See the latest highlights, follower updates, and success stories on our Instagram. We keep things transparent — practical learnings and charts.</p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <a class="btn btn-outline" href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer">Open Instagram</a>
+            <a class="btn btn-primary" href="#community">Open Discord</a>
+          </div>
+        </div>
+
+        <div style="min-width:220px; border-radius:10px;background:white;border:1px solid var(--border);padding:12px;display:grid;place-items:center;color:var(--muted)">
+          Instagram feed preview
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY CTA -->
+    <section id="community" style="margin-top:18px">
+      <div class="community">
+        <div>
+          <h3 style="margin:0">Join the TRADING DOJON community</h3>
+          <p style="margin:8px 0 0;color:rgba(255,255,255,0.92);max-width:50ch">Daily insight threads, real-time chat, market reviews, and a supportive group that holds risk-first discipline above all.</p>
+        </div>
+
+        <div class="actions">
+          <a class="btn" style="background:white;color:var(--accent-1);font-weight:700;border-radius:10px" href="https://discord.gg/DUxBUtXzrK" target="_blank" rel="noreferrer">Join Discord</a>
+          <a class="btn" style="border:1px solid rgba(255,255,255,0.28);color:white;background:transparent" href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer">Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        <div style="font-weight:700">TRADING DOJON</div>
+        <div style="color:var(--muted);margin-top:6px">Trusted market insights · Daily & Weekly</div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <a href="#" style="color:var(--muted)">Telegram (coming)</a>
+        <a href="https://www.instagram.com/trading_donj0n/" target="_blank" rel="noreferrer" style="color:var(--muted)">Instagram</a>
+        <a href="mailto:hello@tradingdojon.example" style="color:var(--muted)">hello@tradingdojon.example</a>
+      </div>
+      <div style="width:100%;text-align:center;color:var(--muted);margin-top:12px;font-size:12px">© <span id="year"></span> TRADING DOJON. All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    // inject current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // keep marquee accessible: pause on hover/focus
+    (function(){
+      const ticker = document.querySelector('.ticker-inner');
+      ['mouseenter','focusin'].forEach(e => {
+        ticker.addEventListener(e, () => ticker.style.animationPlayState = 'paused');
+      });
+      ['mouseleave','focusout'].forEach(e => {
+        ticker.addEventListener(e, () => ticker.style.animationPlayState = 'running');
+      });
+    }());
+  </script>
+</body>
+</html>
